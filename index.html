@@ -21,7 +21,9 @@
       <span class="u-brand__name">UNDP RAPIDA Monitor<small>Media Coverage</small></span>
     </a>
     <nav class="u-nav u-nav--left" aria-label="Main">
-      <a href="./" aria-current="page">Library</a>
+      <a href="index.html" aria-current="page">Library</a>
+      <a href="briefs.html">Briefs</a>
+      <a href="pictures.html">Pictures</a>
     </nav>
     <div class="u-nav u-nav--right">
       <span class="u-user">Read-only · updated 13 Nov 2026</span>
@@ -173,6 +175,7 @@ document.addEventListener("click", function (e) {
 document.querySelectorAll("[data-acc]").forEach(function (b) {
   b.addEventListener("click", function () { var open = b.dataset.acc === "open"; document.querySelectorAll("details.acc").forEach(function (d) { d.open = open; }); });
 });
+(function () { var u = new URLSearchParams(location.search); ["country", "hazard", "q"].forEach(function (k) { if (u.get(k)) $("f-" + k).value = u.get(k); }); })();
 render();
 </script>
 </body>
