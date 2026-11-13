@@ -79,10 +79,10 @@
       <select id="f-pub" aria-label="Who published"><option value="">Published by anyone</option></select>
     </div>
   </details>
-  <a class="filters__clear" href="#" id="f-clear" hidden>Clear filters</a>
+  <a class="filters__clear" href="#" id="f-clear" style="display:none">Clear filters</a>
 </form>
 
-<p class="empty" id="empty" hidden>Nothing here for these filters.</p>
+<p class="empty" id="empty" style="display:none">Nothing here for these filters.</p>
 <div class="acc-tools no-print" id="acc-tools"><button type="button" data-acc="open">Expand all</button><button type="button" data-acc="close">Collapse all</button></div>
 <div id="groups"></div>
 </main>
@@ -134,15 +134,15 @@ function render() {
     return (!c || r.country === c) && (!h || r.hazard === h) && (!l || r.lang === l) && (!p || r.platform === p) && (!pub || r.pub === pub) &&
       (!q || [r.title, r.outlet, r.snip, r.country, r.hazard].join(" ").toLowerCase().indexOf(q) >= 0);
   });
-  $("f-clear").hidden = !(q || c || h || l || p || pub);
-  $("empty").hidden = rows.length > 0;
+  $("f-clear").style.display = (q || c || h || l || p || pub) ? "" : "none";
+  $("empty").style.display = rows.length ? "none" : "";
   var groups = [], idx = {};
   rows.forEach(function (r) { var k = key(r, by); if (!(k in idx)) { idx[k] = groups.length; groups.push({ name: k, rows: [] }); } groups[idx[k]].rows.push(r); });
   if (by !== "month" && by !== "year") groups.sort(function (a, b) {
     var na = a.name.indexOf(" not ") >= 0, nb = b.name.indexOf(" not ") >= 0;
     return (na - nb) || (b.rows.length - a.rows.length) || a.name.localeCompare(b.name);
   });
-  $("acc-tools").hidden = by === "none" || !groups.length;
+  $("acc-tools").style.display = (by === "none" || !groups.length) ? "none" : "";
   var filtered = q || c || h;
   $("groups").innerHTML = groups.map(function (g, i) {
     var subs = [["", g.rows]];
